@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="HTTP," />
+  <meta name="keywords" content="HTTP协议," />
 
 
 
@@ -104,13 +104,13 @@
 
 <meta name="description" content="摘要:    HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对HTTP的一些理解">
+<meta property="og:title" content="对HTTP的一些了解">
 <meta property="og:url" content="https://zoezying.github.io/2016/06/07/对HTTP的一些理解/index.html">
 <meta property="og:site_name" content="小志的blog">
 <meta property="og:description" content="摘要:    HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。">
-<meta property="og:updated_time" content="2016-06-30T19:11:27.049Z">
+<meta property="og:updated_time" content="2016-07-01T05:48:32.352Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="对HTTP的一些理解">
+<meta name="twitter:title" content="对HTTP的一些了解">
 <meta name="twitter:description" content="摘要:    HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。">
 
 
@@ -134,7 +134,7 @@
 
   <link rel="canonical" href="https://zoezying.github.io/2016/06/07/对HTTP的一些理解/"/>
 
-  <title> 对HTTP的一些理解 | 小志的blog </title>
+  <title> 对HTTP的一些了解 | 小志的blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -254,7 +254,7 @@
             
             
               
-                对HTTP的一些理解
+                对HTTP的一些了解
               
             
           </h1>
@@ -280,8 +280,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/HTTP/" itemprop="url" rel="index">
-                    <span itemprop="name">HTTP</span>
+                  <a href="/categories/HTTP协议/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP协议</span>
                   </a>
                 </span>
 
@@ -321,6 +321,18 @@
 
       
         <p>摘要:<br>    HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。<br><a id="more"></a></p>
+<h1 id="对HTTP协议的一些了解"><a href="#对HTTP协议的一些了解" class="headerlink" title="对HTTP协议的一些了解"></a>对HTTP协议的一些了解</h1><h2 id="报文格式"><a href="#报文格式" class="headerlink" title="报文格式"></a>报文格式</h2><p>HTTP报文有请求报文和响应报文，他们都是由三个部分组成，分别为头行、头部和主体。</p>
+<h3 id="请求报文格式"><a href="#请求报文格式" class="headerlink" title="请求报文格式"></a>请求报文格式</h3><p>  <strong>1、头行有三个部分，分别为HTTP的方法、地址、HTTP的版本；例如GET  xxx.xxx.com  HTTP/1.1</strong></p>
+<p>  <strong>2、头部：</strong></p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Accept：text/html,application/xhtml+xml,application/xml;q=<span class="number">0.9</span>,image/webp,*<span class="comment">/*;q=0.8 //浏览器端可以接收的媒体类型</span><br><span class="line">Accept-Encoding: gzip,deflate,sdch //浏览器端可以接收的媒体类型的编码方式</span><br><span class="line">Accept-Language: en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4 //浏览器端可以接收的语言类型</span><br><span class="line">Cache-Control: no-cache//指定缓存的策略，这里指定的是不缓存</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Cookie: visited=true;playlist=65117392DNT:1 //向服务器发送的Cookie值</span><br><span class="line">Host: xxx.xxx.com</span><br><span class="line">Pragma: no-cache</span><br><span class="line">User-Agent: Mozilla/5.0(Windows NT 6.1; WOW64) AppleWebKit/537.36(KHTML,like Gecko)</span><br><span class="line">Chrome/41.0.2272.118 Safari/537.36 //指定浏览器的版本</span></span><br></pre></td></tr></table></figure>
+<p>  <strong>3、主体：</strong> 由于是GET方法，所以请求体为空</p>
+<h3 id="响应式报文格式"><a href="#响应式报文格式" class="headerlink" title="响应式报文格式"></a>响应式报文格式</h3><p>  <strong>1、头行有三个部分，分别为HTTP协议的版本、HTTP状态码、HTTP状态码的描述；例如：HTTP/1.1  200  OK</strong></p>
+<p>  <strong>2、头部：</strong></p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Cache-Control: no-cache</span><br><span class="line">Cache-Control: no-store</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">Content-Language: en-US</span><br><span class="line">Content-Type: text/html;charset=utf8</span><br><span class="line">Date: Fri,<span class="number">17</span> Apr <span class="number">2015</span> <span class="number">01</span>:<span class="number">48</span>:<span class="number">12</span> GMT</span><br><span class="line">Expires: Thu,<span class="number">01</span> Jan <span class="number">1970</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> GMT <span class="comment">//指定缓存的有效时间</span></span><br><span class="line">Pragma: no-cache</span><br><span class="line">Server: nginx <span class="comment">//指定服务端的HTTP服务器</span></span><br><span class="line">Transfer-Encoding:chunked</span><br><span class="line">Vary: Accept-Encoding</span><br></pre></td></tr></table></figure>
+<p>  <strong>3、主体：</strong>由于请求的是一个页面，所以主体包含了整个html结构。</p>
+<h2 id="常用的HTTP方法"><a href="#常用的HTTP方法" class="headerlink" title="常用的HTTP方法"></a>常用的HTTP方法</h2><p>  1、<strong>GET：</strong>从服务器获取一份文档 不包含主体 //最常用的方法<br>  2、<strong>POST：</strong>向服务器发送需要处理的数据 包含主体<br>  3、<strong>PUT：</strong>将请求的主体部分存储在服务器上 包含主体<br>  4、<strong>DELETE：</strong> 从服务器上删除一份文档 不包含主体<br>  5、<strong>HEAD：</strong>只从服务器获取文档的首部 不包含主体<br>  6、<strong>TRACE：</strong>对可能经过代理服务器传送到服务器上去的报文进行追踪 不包含主体<br>  7、<strong>OPTIONS：</strong>决定可以在服务器上执行哪些方法 不包含主体</p>
+<h2 id="HTTP的版本"><a href="#HTTP的版本" class="headerlink" title="HTTP的版本"></a>HTTP的版本</h2><p>  1、<strong>HTTP/0.9</strong>  1991年，HTTP的原型，有很多设计缺陷<br>  2、<strong>HTTP/1.0</strong>  取代HTTP/0.9，成为第一个广泛应用的版本<br>  3、<strong>HTTP/1.0+</strong> 添加持久的keep-alive连接、虚拟主机支持，以及代理连接支持，成为非官方的事实标准<br>  4、<strong>HTTP/1.1</strong>  校正了结构性缺陷，明确语义，引入重要的性能优化措施，删除不好特性，是当前使用的版本</p>
+<h2 id="常见的HTTP状态码"><a href="#常见的HTTP状态码" class="headerlink" title="常见的HTTP状态码"></a>常见的HTTP状态码</h2><p>  1、<strong>200</strong>  请求成功。一般用于GET和POST方法 描述信息为：OK<br>  2、<strong>301</strong>  资源移动。所请求资源自动到新的URL，浏览器自动跳转到新的URL 描述信息为：Moved Permanently<br>  3、<strong>304</strong>  未修改。所请求资源未修改，浏览器读取缓存数据 描述信息为：Not Modified<br>  4、<strong>400</strong>  请求语法错误，服务器无法理解 Bad Request<br>  5、<strong>404</strong>  未找到资源，可以设置个性“404页面” 描述信息为：Not Found<br>  6、<strong>500</strong>  服务器内部错误 描述信息为：Internal Server Error</p>
 
       
     </div>
@@ -342,7 +354,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/HTTP/" rel="tag">#HTTP</a>
+            <a href="/tags/HTTP协议/" rel="tag">#HTTP协议</a>
           
         </div>
       
@@ -384,7 +396,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/06/07/对HTTP的一些理解/"
-           data-title="对HTTP的一些理解" data-url="https://zoezying.github.io/2016/06/07/对HTTP的一些理解/">
+           data-title="对HTTP的一些了解" data-url="https://zoezying.github.io/2016/06/07/对HTTP的一些理解/">
       </div>
     
   </div>
@@ -475,7 +487,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#对HTTP协议的一些了解"><span class="nav-number">1.</span> <span class="nav-text">对HTTP协议的一些了解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#报文格式"><span class="nav-number">1.1.</span> <span class="nav-text">报文格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请求报文格式"><span class="nav-number">1.1.1.</span> <span class="nav-text">请求报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应式报文格式"><span class="nav-number">1.1.2.</span> <span class="nav-text">响应式报文格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的HTTP方法"><span class="nav-number">1.2.</span> <span class="nav-text">常用的HTTP方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP的版本"><span class="nav-number">1.3.</span> <span class="nav-text">HTTP的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的HTTP状态码"><span class="nav-number">1.4.</span> <span class="nav-text">常见的HTTP状态码</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
