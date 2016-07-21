@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="内存泄漏," />
 
 
 
@@ -102,15 +102,16 @@
 
 
 
-<meta name="description" content="记录我的一切">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小志的blog">
-<meta property="og:url" content="https://zoezying.github.io/index.html">
+<meta name="description" content="摘要:    内存泄露是指一块被分配的内存既不能使用，又不能回收，直到浏览器进程结束。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存泄漏">
+<meta property="og:url" content="https://zoezying.github.io/2016/06/07/内存泄漏/index.html">
 <meta property="og:site_name" content="小志的blog">
-<meta property="og:description" content="记录我的一切">
+<meta property="og:description" content="摘要:    内存泄露是指一块被分配的内存既不能使用，又不能回收，直到浏览器进程结束。">
+<meta property="og:updated_time" content="2016-07-20T19:37:57.639Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小志的blog">
-<meta name="twitter:description" content="记录我的一切">
+<meta name="twitter:title" content="内存泄漏">
+<meta name="twitter:description" content="摘要:    内存泄露是指一块被分配的内存既不能使用，又不能回收，直到浏览器进程结束。">
 
 
 
@@ -131,9 +132,9 @@
 
 
 
-  <link rel="canonical" href="https://zoezying.github.io/"/>
+  <link rel="canonical" href="https://zoezying.github.io/2016/06/07/内存泄漏/"/>
 
-  <title> 小志的blog </title>
+  <title> 内存泄漏 | 小志的blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,9 +155,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -233,9 +232,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -255,10 +254,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/06/07/内存泄漏/" itemprop="url">
-                  内存泄漏
-                </a>
+                内存泄漏
               
             
           </h1>
@@ -324,298 +320,71 @@
       
 
       
-        
-          <p>摘要:<br>    内存泄露是指一块被分配的内存既不能使用，又不能回收，直到浏览器进程结束。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/07/内存泄漏/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+        <p>摘要:<br>    内存泄露是指一块被分配的内存既不能使用，又不能回收，直到浏览器进程结束。<br><a id="more"></a></p>
+<h1 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h1><h2 id="什么是内存泄露？"><a href="#什么是内存泄露？" class="headerlink" title="什么是内存泄露？"></a>什么是内存泄露？</h2><p>内存泄露是指一块被分配的内存既不能使用，又不能回收，直到浏览器进程结束。在C++中，因为是手动管理内存，内存泄露是经常出现的事情。而现在流行的C#和Java等语言采用了自动垃圾回收方法管理内存，正常使用的情况下几乎不会发生内存泄露。浏览器中也是采用自动垃圾回收方法管理内存，但由于浏览器垃圾回收方法有bug，会产生内存泄露。</p>
+<h2 id="常见内存泄露的几种情况"><a href="#常见内存泄露的几种情况" class="headerlink" title="常见内存泄露的几种情况"></a>常见内存泄露的几种情况</h2><p><strong>1、</strong>循环引用<br><strong>2、</strong>Javascript闭包<br><strong>3、</strong>DOM插入</p>
+<p>一个DOM对象被一个Javascript对象引用，与此同时又引用同一个或其它的Javascript对象，这个DOM对象可能会引发内存泄漏。这个DOM对象的引用将不会在脚本停止的时候被垃圾回收器回收。要想破坏循环引用，引用DOM元素的对象或DOM对象的引用需要被赋值为null。</p>
+<p>其实绝大部分内存泄漏都不是由Javascript引起的，浏览器的回收机制已经做的相当好了，多数的泄漏都是由于与DOM交互而产生的。</p>
+<h2 id="含有DOM对象的循环引用将导致大部分当前主流浏览器内存泄露"><a href="#含有DOM对象的循环引用将导致大部分当前主流浏览器内存泄露" class="headerlink" title="含有DOM对象的循环引用将导致大部分当前主流浏览器内存泄露"></a>含有DOM对象的循环引用将导致大部分当前主流浏览器内存泄露</h2><h3 id="第一种：多个对象循环引用"><a href="#第一种：多个对象循环引用" class="headerlink" title="第一种：多个对象循环引用"></a>第一种：多个对象循环引用</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a=new Object;</span><br><span class="line">var b=new Object;</span><br><span class="line"></span><br><span class="line">a.r=b;</span><br><span class="line">b.r=a;</span><br></pre></td></tr></table></figure>
+<h3 id="第二种：循环引用自己"><a href="#第二种：循环引用自己" class="headerlink" title="第二种：循环引用自己"></a>第二种：循环引用自己</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a=new Object;</span><br><span class="line">a.r=a;</span><br></pre></td></tr></table></figure>
+<p>循环引用很常见且大部分情况下是无害的，但当参与循环引用的对象中有DOM对象或者ActiveX对象时，循环引用将导致内存泄露。</p>
+<p>我们把例子中的任何一个new Object替换成document.getElementById或者document.createElement就会发生内存泄露了。</p>
+<p><strong>总结：</strong></p>
+<p>  <strong>1、</strong>JS的内存泄露，无怪乎就是从DOM中remove了元素，但是依然有变量或者对象引用了该DOM对象。然后内存中无法删除。使得浏览器的内存占用居高不下。这种内存占用，随着浏览器的刷新，会自动释放。<br>  <strong>2、</strong>而另外一种情况，就是循环引用，一个DOM对象和JS对象之间互相引用，这样造成的情况更严重一些，即使刷新，内存也不会减少。这就是严格意义上说的内存泄露了。</p>
+<p>所以在平时实际应用中, 我们经常需要给元素缓存一些数据，并且这些数据往往和DOM元素紧密相关。由于DOM元素(节点)也是对象, 所以我们可以直接扩展DOM元素的属性，但是如果给DOM元素添加自定义的属性和过多的数据可能会引起内存泄漏，所以应该要尽量避免这样做。 因此更好的解决方法是使用一种低耦合的方式让DOM和缓存数据能够联系起来。</p>
+
+      
+    </div>
+
+    <div>
+      
         
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/07/对HTTP的一些理解/" itemprop="url">
-                  对HTTP的一些了解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-07T10:33:41+08:00" content="2016-06-07">
-              2016-06-07
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/HTTP协议/" itemprop="url" rel="index">
-                    <span itemprop="name">HTTP协议</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/07/对HTTP的一些理解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/07/对HTTP的一些理解/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/内存泄漏/" rel="tag">#内存泄漏</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>摘要:<br>    HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/07/对HTTP的一些理解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/07/对HTTP的一些理解/" rel="next" title="对HTTP的一些了解">
+                <i class="fa fa-chevron-left"></i> 对HTTP的一些了解
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/06/html编码规范（转）/" itemprop="url">
-                  html编码规范（转）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-06T09:33:41+08:00" content="2016-06-06">
-              2016-06-06
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/html/" itemprop="url" rel="index">
-                    <span itemprop="name">html</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/html/编码规范/" itemprop="url" rel="index">
-                    <span itemprop="name">编码规范</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/06/html编码规范（转）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/06/html编码规范（转）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>摘要:<br>    HTML作为描述网页结构的超文本标记语言，在百度一直有着广泛的应用。本文档的目标是使HTML 代码风格保持一致，容易被理解和被维护。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/06/html编码规范（转）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -623,6 +392,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/07/内存泄漏/"
+           data-title="内存泄漏" data-url="https://zoezying.github.io/2016/06/07/内存泄漏/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -642,8 +419,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -693,6 +479,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#内存泄露"><span class="nav-number">1.</span> <span class="nav-text">内存泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是内存泄露？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是内存泄露？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见内存泄露的几种情况"><span class="nav-number">1.2.</span> <span class="nav-text">常见内存泄露的几种情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#含有DOM对象的循环引用将导致大部分当前主流浏览器内存泄露"><span class="nav-number">1.3.</span> <span class="nav-text">含有DOM对象的循环引用将导致大部分当前主流浏览器内存泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一种：多个对象循环引用"><span class="nav-number">1.3.1.</span> <span class="nav-text">第一种：多个对象循环引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二种：循环引用自己"><span class="nav-number">1.3.2.</span> <span class="nav-text">第二种：循环引用自己</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -789,6 +586,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
