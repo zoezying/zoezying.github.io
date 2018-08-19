@@ -1,0 +1,664 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="mongoose,node," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="摘要:    用nodejs结合mongoose来操作mongodb数据库，写一个符合restfull api可以访问的接口。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用node + mongoose写restful api接口">
+<meta property="og:url" content="https://zoezying.github.io/2018/03/18/用node + mongoose写restful api接口/index.html">
+<meta property="og:site_name" content="小志的blog">
+<meta property="og:description" content="摘要:    用nodejs结合mongoose来操作mongodb数据库，写一个符合restfull api可以访问的接口。">
+<meta property="og:image" content="https://zoezying.github.io/images/postman.jpg">
+<meta property="og:updated_time" content="2018-08-19T18:15:52.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用node + mongoose写restful api接口">
+<meta name="twitter:description" content="摘要:    用nodejs结合mongoose来操作mongodb数据库，写一个符合restfull api可以访问的接口。">
+<meta name="twitter:image" content="https://zoezying.github.io/images/postman.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '小Z'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://zoezying.github.io/2018/03/18/用node + mongoose写restful api接口/"/>
+
+  <title> 用node + mongoose写restful api接口 | 小志的blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小志的blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">每天都要动力十足</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                用node + mongoose写restful api接口
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-03-18T10:33:41+08:00" content="2018-03-18">
+              2018-03-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/node/" itemprop="url" rel="index">
+                    <span itemprop="name">node</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/03/18/用node + mongoose写restful api接口/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/18/用node + mongoose写restful api接口/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘要:<br>    用nodejs结合mongoose来操作mongodb数据库，写一个符合restfull api可以访问的接口。<br><a id="more"></a></p>
+<h1 id="安装mongoose"><a href="#安装mongoose" class="headerlink" title="安装mongoose"></a>安装mongoose</h1><p>Mongoose是MongoDB的一个对象模型工具，是基于node-mongodb-native开发的MongoDB nodejs驱动，可以在异步的环境下执行。同时它也是针对MongoDB操作的一个对象模型库，封装了MongoDB对文档的的一些增删改查等常用方法，让NodeJS操作Mongodb数据库变得更加灵活简单。本文不对mongoose做多相关介绍，如想了解mongoose相关操作，可以参考<a href="/2018/06/07/mongoose/" title="mongoose">mongoose</a>。<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  进入项目根目录，输入以下命令安装mongoose</span></span><br><span class="line">npm install mongoose --<span class="keyword">save</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="定义mongoose的数据属性模型"><a href="#定义mongoose的数据属性模型" class="headerlink" title="定义mongoose的数据属性模型"></a>定义mongoose的数据属性模型</h1><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  新建一个db.js文件，用来编写mongoose的数据模型操作</span></span><br><span class="line">touch <span class="keyword">db</span>.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  db.js</span></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)  <span class="comment">//  引入刚刚安装好的mongoose</span></span><br><span class="line"><span class="keyword">var</span> Schema = mongoose.Schema</span><br><span class="line"></span><br><span class="line"><span class="comment">//  定义数据属性模型</span></span><br><span class="line"><span class="keyword">var</span> userSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">  username: &#123;</span><br><span class="line">    <span class="keyword">type</span>: <span class="built_in">String</span>,</span><br><span class="line">    required: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  phone: &#123;</span><br><span class="line">    <span class="keyword">type</span>: <span class="built_in">String</span>,</span><br><span class="line">    required: <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  email: <span class="built_in">String</span>,</span><br><span class="line">  created: &#123;</span><br><span class="line">    <span class="keyword">type</span>: <span class="built_in">Date</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="built_in">Date</span>.now</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span>.exports = &#123;</span><br><span class="line">  User: mongoose.model(<span class="string">'User'</span>, userSchema)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="node启动服务器"><a href="#node启动服务器" class="headerlink" title="node启动服务器"></a>node启动服务器</h1><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//  新建一个server.js文件，用来编写<span class="keyword">node</span><span class="title">的操作</span><br><span class="line">touch</span> server.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  server.js</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>)  <span class="comment">//  由于express更新版本的时候，把body-parser中间件给独立出去了，需要重新引入使用一下，否则从前端post过来的body会是undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> app = express()</span><br><span class="line"></span><br><span class="line"><span class="comment">//  设置跨域头</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.header(<span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'*'</span>);</span><br><span class="line">  res.header(<span class="string">'Access-Control-Allow-Headers'</span>, <span class="string">'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild'</span>);</span><br><span class="line">  res.header(<span class="string">'Access-Control-Allow-Methods'</span>, <span class="string">'PUT, POST, GET, DELETE, OPTIONS'</span>);</span><br><span class="line"></span><br><span class="line">  next()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//  监听端口号，启动服务器</span></span><br><span class="line"><span class="keyword">let</span> server = app.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> host = server.address().address</span><br><span class="line">  <span class="keyword">let</span> port = server.address().port</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Example app listening at http://%s:%s'</span>, host, port)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>然后我们到存放server.js文件目录下，打开命令行输入<code>node server.js</code>命令启动服务器<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span> <span class="title">server</span>.js</span><br><span class="line"></span><br><span class="line">//  显示如下内容，则表示成功启动服务器</span><br><span class="line">Example app listening at http://:::<span class="number">3000</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="用express的router-route编写接口"><a href="#用express的router-route编写接口" class="headerlink" title="用express的router.route编写接口"></a>用express的router.route编写接口</h1><p>用express的router.route创建路由路径的链式路由句柄。由于路径在一个地方指定，这样做有助于创建模块化的路由，而且减少了代码冗余和拼写错误。<br><figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  server.js</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="keyword">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> bodyParser = <span class="keyword">require</span>(<span class="string">'body-parser'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> app = express()</span><br><span class="line"><span class="keyword">let</span> router = express.Router()</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line"><span class="comment">//  设置传过来的body内容大小限制</span></span><br><span class="line">app.<span class="keyword">use</span>(bodyParser.json(&#123;limit: <span class="string">'50mb'</span>&#125;))</span><br><span class="line">app.<span class="keyword">use</span>(bodyParser.urlencoded(&#123;limit: <span class="string">'50mb'</span>, extended: <span class="keyword">true</span>&#125;))</span><br><span class="line">app.<span class="keyword">use</span>(express.json(&#123;limit: <span class="string">'100mb'</span>&#125;))</span><br><span class="line"></span><br><span class="line"><span class="comment">//  为了后续兼容问题，我们要对路径添加版本号</span></span><br><span class="line">router.route(<span class="string">'/v1/user'</span>)</span><br><span class="line">  .get((req, res) =&gt; &#123;</span><br><span class="line">    <span class="comment">//  一个完整的restful api应该要包含状态码</span></span><br><span class="line">    res.json(&#123;</span><br><span class="line">      status: <span class="number">200</span>,</span><br><span class="line">      data: <span class="string">'someData'</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//  给所有路由加上前缀 /api</span></span><br><span class="line">app.<span class="keyword">use</span>(<span class="string">'/api'</span>, router)</span><br><span class="line"></span><br><span class="line"><span class="comment">//  监听端口号，启动服务器</span></span><br><span class="line"><span class="keyword">let</span> server = app.listen(<span class="number">3000</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> host = server.address().address</span><br><span class="line">  <span class="keyword">let</span> port = server.address().port</span><br><span class="line"></span><br><span class="line">  console.log(<span class="string">'Example app listening at http://%s:%s'</span>, host, port)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>我们写好接口后，可以利用谷歌chrome浏览器的postman插件进行调试接口，到谷歌应用市场搜索postman进行安装，或者下载postman文件进行离线安装，下载地址：<a href="http://files.cnblogs.com/files/mafly/postman-4.1.2.rar" target="_blank" rel="external">postman</a><br>安装好了之后，我们打开postman，请求方法默认是GET，所以在地址栏那里输入我们的api路径，点击右边send按钮就可以了，如果返回结果如图显示一致，则表示访问该api接口没有问题。<br><img src="/images/postman.jpg" alt="postman"></p>
+<h1 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h1><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  server.js</span></span><br><span class="line">const express = <span class="keyword">require</span>(<span class="string">'express'</span>)</span><br><span class="line">const bodyParser = <span class="keyword">require</span>(<span class="string">'body-parser'</span>)</span><br><span class="line">const mongoose = <span class="keyword">require</span>(<span class="string">'mongoose'</span>)  <span class="comment">//  引入刚刚安装好的mongoose</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> app = express()</span><br><span class="line"><span class="keyword">let</span> router = express.Router()</span><br><span class="line"><span class="keyword">let</span> dbUrl = <span class="string">'mongodb://someUrl'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  连接数据库</span></span><br><span class="line">mongoose.connect(dbUrl)</span><br><span class="line"></span><br><span class="line"><span class="comment">//  对连接数据库的结果进行监听</span></span><br><span class="line">mongoose.connection.<span class="keyword">on</span>(<span class="string">'connected'</span>, () =&gt; &#123;</span><br><span class="line">  console.<span class="keyword">log</span>(<span class="string">'MongoDB connected.'</span>)</span><br><span class="line">&#125;)</span><br><span class="line">mongoose.connection.<span class="keyword">on</span>(<span class="string">'error'</span>, (err) =&gt; &#123;</span><br><span class="line">  console.<span class="keyword">log</span>(<span class="string">'MongoDB connection error:'</span> + err)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="attr">...</span><span class="attr">...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  监听端口号，启动服务器</span></span><br><span class="line"><span class="keyword">let</span> server = app.listen(<span class="number">3000</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> host = server.address().address</span><br><span class="line">  <span class="keyword">let</span> port = server.address().port</span><br><span class="line"></span><br><span class="line">  console.<span class="keyword">log</span>(<span class="string">'Example app listening at http://%s:%s'</span>, host, port)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="结合mongoose编写接口"><a href="#结合mongoose编写接口" class="headerlink" title="结合mongoose编写接口"></a>结合mongoose编写接口</h1><figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">//  server.js</span><br><span class="line">const express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line">const bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>)</span><br><span class="line">const mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line">const db = <span class="built_in">require</span>(<span class="string">'./db'</span>)  //  引入我们之前新建的db.js</span><br><span class="line">const User = db.User</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">router.route(<span class="string">'/v1/user'</span>)</span><br><span class="line">  .post(<span class="function"><span class="params">(req, res)</span> =&gt;</span> &#123;</span><br><span class="line">    let data = req.body</span><br><span class="line">    </span><br><span class="line">    User.create(data, <span class="function"><span class="params">(<span class="built_in">error</span>, doc)</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">error</span>) &#123;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">          <span class="name">status</span>: <span class="number">403</span>,</span><br><span class="line">          <span class="name">msg</span>: <span class="built_in">error</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">          <span class="name">status</span>: <span class="number">201</span>,</span><br><span class="line">          <span class="name">msg</span>: <span class="string">'添加成功！'</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  .get(<span class="function"><span class="params">(req, res)</span> =&gt;</span> &#123;</span><br><span class="line">    User.find(&#123;&#125;, <span class="function"><span class="params">(<span class="built_in">error</span>, doc)</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">error</span>) &#123;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">          <span class="name">status</span>: <span class="number">403</span>,</span><br><span class="line">          <span class="name">msg</span>: <span class="built_in">error</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">          <span class="name">status</span>: <span class="number">200</span>,</span><br><span class="line">          <span class="name">data</span>: doc</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">router.route(<span class="string">'/v1/user/:id'</span>)</span><br><span class="line">  .get(<span class="function"><span class="params">(req, res)</span> =&gt;</span> &#123;</span><br><span class="line">    let userId = req.param.id</span><br><span class="line"></span><br><span class="line">    User.findById(&#123;userId&#125;, <span class="function"><span class="params">(<span class="built_in">error</span>, doc)</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">error</span>) &#123;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">          <span class="name">status</span>: <span class="number">403</span>,</span><br><span class="line">          <span class="name">msg</span>: <span class="built_in">error</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">if</span> (!doc) &#123;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">          <span class="name">status</span>: <span class="number">404</span>,</span><br><span class="line">          <span class="name">msg</span>: <span class="string">'用户不存在'</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">          <span class="name">status</span>: <span class="number">200</span>,</span><br><span class="line">          <span class="name">data</span>: doc</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">//  给所有路由加上前缀 /api</span><br><span class="line">app.use(<span class="string">'/api'</span>, router)</span><br><span class="line"></span><br><span class="line">//  监听端口号，启动服务器</span><br><span class="line">let server = app.listen(<span class="number">3000</span>, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  let host = server.address().address</span><br><span class="line">  let port = server.address().port</span><br><span class="line"></span><br><span class="line">  console.log(<span class="string">'Example app listening at http://%s:%s'</span>, host, port)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mongoose/" rel="tag">#mongoose</a>
+          
+            <a href="/tags/node/" rel="tag">#node</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/07/webpack/" rel="next" title="webpack学习笔记">
+                <i class="fa fa-chevron-left"></i> webpack学习笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/20/用vue-cli搭建一个项目/" rel="prev" title="用vue-cli搭建一个项目">
+                用vue-cli搭建一个项目 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/03/18/用node + mongoose写restful api接口/"
+           data-title="用node + mongoose写restful api接口" data-url="https://zoezying.github.io/2018/03/18/用node + mongoose写restful api接口/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Zzy" />
+          <p class="site-author-name" itemprop="name">Zzy</p>
+          <p class="site-description motion-element" itemprop="description">记录我的一切</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装mongoose"><span class="nav-number">1.</span> <span class="nav-text">安装mongoose</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义mongoose的数据属性模型"><span class="nav-number">2.</span> <span class="nav-text">定义mongoose的数据属性模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#node启动服务器"><span class="nav-number">3.</span> <span class="nav-text">node启动服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用express的router-route编写接口"><span class="nav-number">4.</span> <span class="nav-text">用express的router.route编写接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连接数据库"><span class="nav-number">5.</span> <span class="nav-text">连接数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结合mongoose编写接口"><span class="nav-number">6.</span> <span class="nav-text">结合mongoose编写接口</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zzy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzying-ds"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
