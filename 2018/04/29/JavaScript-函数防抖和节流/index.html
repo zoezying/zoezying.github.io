@@ -108,7 +108,7 @@
 <meta property="og:url" content="https://zoezying.github.io/2018/04/29/JavaScript-函数防抖和节流/index.html">
 <meta property="og:site_name" content="小志的blog">
 <meta property="og:description" content="摘要:    了解 JavaScript 函数防抖和节流。">
-<meta property="og:updated_time" content="2018-08-29T03:05:14.044Z">
+<meta property="og:updated_time" content="2019-03-29T10:23:39.271Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 函数防抖和节流">
 <meta name="twitter:description" content="摘要:    了解 JavaScript 函数防抖和节流。">
@@ -340,7 +340,8 @@
       
 
       
-        <p>摘要:<br>    了解 JavaScript 函数防抖和节流。<br><a id="more"></a><br>假如有一个饮水机，规定按下按钮之后2秒后开始出水，有个闲得x疼的人很快的按按钮10秒，饮水机会作何反应呢？</p>
+        <p>摘要:<br>    了解 JavaScript 函数防抖和节流。<br><a id="more"></a></p>
+<p>假如有一个饮水机，规定按下按钮之后2秒后开始出水，有个闲得x疼的人很快的按按钮10秒，饮水机会作何反应呢？</p>
 <h1 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h1><p>在按下按钮和出水的这2秒内如果还有人按按钮，饮水机会重新开始计算2秒，也就是说总是以最新的操作为基准来计算时间</p>
 <p><strong>代码实现：</strong><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span><span class="params">(func, delay)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timer;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        clearTimeout(timeout)</span><br><span class="line">        timer = setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">          func()</span><br><span class="line">        &#125;,delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h1><p>即使被人不间断的按按钮了10秒钟，但是饮水机依然不紧不慢的2s出一次水，也就是说不管外部操作的多快，饮水机总会有自己的频率</p>
@@ -469,7 +470,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -477,7 +478,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -486,7 +487,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

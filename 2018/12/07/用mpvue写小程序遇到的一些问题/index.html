@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="vue,vue-cli," />
+  <meta name="keywords" content="mpvue," />
 
 
 
@@ -102,16 +102,16 @@
 
 
 
-<meta name="description" content="摘要:    用vue-cli快速搭建一个基于vue的项目">
+<meta name="description" content="摘要:    用 mpvue 框架开发小程序遇到的一些问题的总结。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用vue-cli搭建一个项目">
-<meta property="og:url" content="https://zoezying.github.io/2018/03/20/用vue-cli搭建一个项目/index.html">
+<meta property="og:title" content="用 mpvue 框架开发小程序遇到的一些问题">
+<meta property="og:url" content="https://zoezying.github.io/2018/12/07/用mpvue写小程序遇到的一些问题/index.html">
 <meta property="og:site_name" content="小志的blog">
-<meta property="og:description" content="摘要:    用vue-cli快速搭建一个基于vue的项目">
-<meta property="og:updated_time" content="2018-08-19T23:23:59.067Z">
+<meta property="og:description" content="摘要:    用 mpvue 框架开发小程序遇到的一些问题的总结。">
+<meta property="og:updated_time" content="2019-03-29T10:12:03.889Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用vue-cli搭建一个项目">
-<meta name="twitter:description" content="摘要:    用vue-cli快速搭建一个基于vue的项目">
+<meta name="twitter:title" content="用 mpvue 框架开发小程序遇到的一些问题">
+<meta name="twitter:description" content="摘要:    用 mpvue 框架开发小程序遇到的一些问题的总结。">
 
 
 
@@ -132,9 +132,9 @@
 
 
 
-  <link rel="canonical" href="https://zoezying.github.io/2018/03/20/用vue-cli搭建一个项目/"/>
+  <link rel="canonical" href="https://zoezying.github.io/2018/12/07/用mpvue写小程序遇到的一些问题/"/>
 
-  <title> 用vue-cli搭建一个项目 | 小志的blog </title>
+  <title> 用 mpvue 框架开发小程序遇到的一些问题 | 小志的blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -274,7 +274,7 @@
             
             
               
-                用vue-cli搭建一个项目
+                用 mpvue 框架开发小程序遇到的一些问题
               
             
           </h1>
@@ -286,8 +286,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-03-20T10:33:41+08:00" content="2018-03-20">
-              2018-03-20
+            <time itemprop="dateCreated" datetime="2018-12-07T18:22:26+08:00" content="2018-12-07">
+              2018-12-07
             </time>
           </span>
 
@@ -300,8 +300,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index">
-                    <span itemprop="name">vue</span>
+                  <a href="/categories/mpvue/" itemprop="url" rel="index">
+                    <span itemprop="name">mpvue</span>
                   </a>
                 </span>
 
@@ -316,8 +316,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2018/03/20/用vue-cli搭建一个项目/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/20/用vue-cli搭建一个项目/" itemprop="commentsCount"></span>
+                <a href="/2018/12/07/用mpvue写小程序遇到的一些问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/12/07/用mpvue写小程序遇到的一些问题/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -340,15 +340,24 @@
       
 
       
-        <p>摘要:<br>    用vue-cli快速搭建一个基于vue的项目<br><a id="more"></a></p>
-<h1 id="vue-cli的安装"><a href="#vue-cli的安装" class="headerlink" title="vue-cli的安装"></a>vue-cli的安装</h1><h2 id="全局安装vue-cli，打开命令行输入如下命令：（默认你是安装好了node和npm）"><a href="#全局安装vue-cli，打开命令行输入如下命令：（默认你是安装好了node和npm）" class="headerlink" title="全局安装vue-cli，打开命令行输入如下命令：（默认你是安装好了node和npm）"></a>全局安装vue-cli，打开命令行输入如下命令：（默认你是安装好了<code>node</code>和<code>npm</code>）</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-<span class="keyword">cli</span> -<span class="keyword">g</span></span><br></pre></td></tr></table></figure>
-<p>安装完成后，可以在命令行输入如下命令进行检查是否安装成功</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue -V <span class="comment">//注意必须是要大写的V</span></span><br></pre></td></tr></table></figure>
-<h1 id="使用vue-cli搭建项目"><a href="#使用vue-cli搭建项目" class="headerlink" title="使用vue-cli搭建项目"></a>使用vue-cli搭建项目</h1><h2 id="在命令行输入如下命令："><a href="#在命令行输入如下命令：" class="headerlink" title="在命令行输入如下命令："></a>在命令行输入如下命令：</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack project-<span class="built_in">name</span></span><br></pre></td></tr></table></figure>
-<h3 id="接着它会询问你几个问题："><a href="#接着它会询问你几个问题：" class="headerlink" title="接着它会询问你几个问题："></a>接着它会询问你几个问题：</h3><figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Project <span class="built_in">name</span> (project-<span class="built_in">name</span>) <span class="comment">//  项目的名称，直接回车会使用括号默认的名字</span></span><br><span class="line">Project description (a vue.js project) <span class="comment">//  项目的描述，直接回车会使用括号默认的描述 </span></span><br><span class="line">Author(...) <span class="comment">//  项目的作者，如果配置过GIT的作者，它会自动读取</span></span><br><span class="line">Install vue-router?(Y/N) <span class="comment">//  是否要安装vue官方的路由，输入Y表示需要，也可以直接回车表示需要，输入N表示不需要</span></span><br><span class="line">Use ESLint <span class="keyword">to</span> lint your code?(Y/N) <span class="comment">//  是否要安装ESLint来限制你的代码错误和风格</span></span><br><span class="line">setup unit tests <span class="keyword">with</span>  Karma + Mocha? <span class="comment">//  是否需要安装单元测试工具Karma + Mocha</span></span><br><span class="line">Setup e2e tests <span class="keyword">with</span> Nightwatch? <span class="comment">//  是否需要安装e2e来进行用户行为模拟测试</span></span><br></pre></td></tr></table></figure>
-<p>当问题回答完毕后，vue-cli就会开始安装相应的依赖项了，需要一段时间。当都安装完成后，它会提示你：</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">To <span class="built_in">get</span> started:</span><br><span class="line">  cd  project-name <span class="comment">//  进入项目文件夹</span></span><br><span class="line">  npm install      <span class="comment">//  在命令行输入，进行安装依赖项</span></span><br><span class="line">  npm <span class="built_in">run</span> dev      <span class="comment">//  在开发模式下运行项目</span></span><br></pre></td></tr></table></figure>
-<h1 id="vue-cli搭建项目的目录结构"><a href="#vue-cli搭建项目的目录结构" class="headerlink" title="vue-cli搭建项目的目录结构"></a>vue-cli搭建项目的目录结构</h1><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">project-name</span><br><span class="line">  -build        <span class="comment">//  webpack相关配置文件</span></span><br><span class="line">  -config       <span class="comment">//  vue基本配置文件</span></span><br><span class="line">  -node_modules <span class="comment">//  依赖包</span></span><br><span class="line">  -src          <span class="comment">//  项目核心文件</span></span><br><span class="line">    -assets     <span class="comment">//  静态资源</span></span><br><span class="line">    -compnents  <span class="comment">//  公共组件</span></span><br><span class="line">    -router     <span class="comment">//  vue-router</span></span><br><span class="line">    App<span class="selector-class">.vue</span>     <span class="comment">//  根组件</span></span><br><span class="line">    main<span class="selector-class">.js</span>     <span class="comment">//  入口文件</span></span><br><span class="line">  -static       <span class="comment">//  静态资源</span></span><br><span class="line">  <span class="selector-class">.bebeltr</span>      <span class="comment">//  babel编译参数</span></span><br><span class="line">  <span class="selector-class">.editorconfig</span> <span class="comment">//  代码格式</span></span><br><span class="line">  <span class="selector-class">.gitignore</span>    <span class="comment">//  git上传需要忽略的文件配置</span></span><br><span class="line">  <span class="selector-class">.postcssrc</span><span class="selector-class">.js</span> <span class="comment">//  转换css的工具</span></span><br><span class="line">  index<span class="selector-class">.html</span>    <span class="comment">//  主页</span></span><br><span class="line">  package<span class="selector-class">.json</span>  <span class="comment">//  项目基本信息</span></span><br><span class="line">  README<span class="selector-class">.md</span>     <span class="comment">//  项目说明</span></span><br></pre></td></tr></table></figure>
+        <p>摘要:<br>    用 mpvue 框架开发小程序遇到的一些问题的总结。<br><a id="more"></a></p>
+<h1 id="created-生命周期问题"><a href="#created-生命周期问题" class="headerlink" title="created 生命周期问题"></a>created 生命周期问题</h1><p>mpvue 的生命周期 created 跟 vue 的生命周期 created 的不一样，后者是进入当前页面的时候才会触发，而前者是不管有没有进入当前页面都会触发 created 生命周期。所以不推荐在 created 生命周期做数据的初始化，可以在小程序自带的 onLoad 生命周期进行数据的初始化操作。</p>
+<h1 id="数组遍历中出现-should-hava-explicit-keys-错误"><a href="#数组遍历中出现-should-hava-explicit-keys-错误" class="headerlink" title="数组遍历中出现 should hava explicit keys 错误"></a>数组遍历中出现 should hava explicit keys 错误</h1><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div v-<span class="keyword">for</span>=<span class="string">"(value,index) in imglise"</span> <span class="symbol">:key=<span class="string">"index"</span>&gt;&lt;/div&gt;</span></span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在使用 v-for 进行遍历的时候，必须要设置 key ，否则会一直报错。</p>
+<p>还有在嵌套列表渲染的时候，必须指定不同的索引，否则会一直报错。</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;ul v-<span class="keyword">for</span>=<span class="string">"(card, index) in list"</span>&gt;</span><br><span class="line">        &lt;li v-<span class="keyword">for</span>=<span class="string">"(item, itemIndex) in card"</span>&gt;</span><br><span class="line">            <span class="template-variable">&#123;&#123;item.value&#125;&#125;</span></span><br><span class="line">        &lt;<span class="regexp">/li&gt;</span><br><span class="line">    &lt;/ul</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="退出页面重新进入，页面数据未初始化"><a href="#退出页面重新进入，页面数据未初始化" class="headerlink" title="退出页面重新进入，页面数据未初始化"></a>退出页面重新进入，页面数据未初始化</h1><p>需求是：主页 -&gt; A 商品页面 -&gt; 商家页面 -&gt; B 商品页面。</p>
+<p>但是从商家页面进入 B 商品页面的时候，页面数据依然是A商品的。此情况出现的原因可能是 mpvue 的混合周期留下的问题。</p>
+<p>解决方法：可以在 onUnload 生命周期中添加如下代码进行重置 data</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  ......</span><br><span class="line">  onUnload () &#123;</span><br><span class="line">    <span class="comment">//  离开的页面时候，进行重置 data 完成初始化</span></span><br><span class="line">    <span class="built_in">Object</span>.assign(<span class="keyword">this</span>.$data, <span class="keyword">this</span>.$options.data())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="自定义的组件不支持添加-class"><a href="#自定义的组件不支持添加-class" class="headerlink" title="自定义的组件不支持添加 class"></a>自定义的组件不支持添加 class</h1><p>自定义的组件不支持添加样式名，否则会报错，可以套个父标签，把样式名添加到父标签上。</p>
+<h1 id="textarea-组件文字穿透问题"><a href="#textarea-组件文字穿透问题" class="headerlink" title="textarea 组件文字穿透问题"></a>textarea 组件文字穿透问题</h1><p>由于 textarea 组件是小程序底层组件，层级比较高，又无法给它设置层级，所以会导致覆盖在它上面的元素，会出现文字穿透问题。</p>
+<p>解决方法：<br>可以先将 textarea 隐藏掉，然后添加个跟 textarea 组件相同样式的标签，用来向用户展示，然后给该标签添加点击事件，触发点击事件就将 textarea 组件显示出来，并且隐藏自身。然后给 textarea 组件绑定 bindblur 事件，当用户输入完毕，失去焦点之后，就将展示用的标签显示出来，并且赋值给它展示，然后隐藏自身。</p>
+<p><strong>注意: 需要设置 textarea 组件的自动聚焦 auto-focus ，否则用户需要点击两次才能进行输入。</strong></p>
+<h1 id="相对路径的图片不显示"><a href="#相对路径的图片不显示" class="headerlink" title="相对路径的图片不显示"></a>相对路径的图片不显示</h1><p>使用相对路径的图片将不会显示，图片的引入只能使用绝对路径，或者远程图片路径才能显示。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  相对路径的图片无法进行显示</span></span><br><span class="line">&lt;<span class="selector-tag">img</span> src=<span class="string">"../../images/LOGO.png"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  可以把图片放到static文件夹里面，然后使用绝对路径进行引入</span></span><br><span class="line">&lt;<span class="selector-tag">img</span> src=<span class="string">"/static/images/LOGO.png"</span>&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="新增-page-页面，使用微信开发者工具出现报错"><a href="#新增-page-页面，使用微信开发者工具出现报错" class="headerlink" title="新增 page 页面，使用微信开发者工具出现报错"></a>新增 page 页面，使用微信开发者工具出现报错</h1><p>webpack编译文件是由entery决定的，新增的页面没有加入到entery。</p>
+<p>解决办法：重新 npm run dev</p>
 
       
     </div>
@@ -370,9 +379,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/vue/" rel="tag">#vue</a>
-          
-            <a href="/tags/vue-cli/" rel="tag">#vue-cli</a>
+            <a href="/tags/mpvue/" rel="tag">#mpvue</a>
           
         </div>
       
@@ -381,17 +388,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/18/用node + mongoose写restful api接口/" rel="next" title="用node + mongoose写restful api接口">
-                <i class="fa fa-chevron-left"></i> 用node + mongoose写restful api接口
+              <a href="/2018/08/29/JavaScript 编程规范（二）/" rel="next" title="JavaScript 编程规范（二）">
+                <i class="fa fa-chevron-left"></i> JavaScript 编程规范（二）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/20/vuex的使用/" rel="prev" title="vuex的使用">
-                vuex的使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -417,8 +420,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2018/03/20/用vue-cli搭建一个项目/"
-           data-title="用vue-cli搭建一个项目" data-url="https://zoezying.github.io/2018/03/20/用vue-cli搭建一个项目/">
+      <div class="ds-thread" data-thread-key="2018/12/07/用mpvue写小程序遇到的一些问题/"
+           data-title="用 mpvue 框架开发小程序遇到的一些问题" data-url="https://zoezying.github.io/2018/12/07/用mpvue写小程序遇到的一些问题/">
       </div>
     
   </div>
@@ -509,7 +512,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-cli的安装"><span class="nav-number">1.</span> <span class="nav-text">vue-cli的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#全局安装vue-cli，打开命令行输入如下命令：（默认你是安装好了node和npm）"><span class="nav-number">1.1.</span> <span class="nav-text">全局安装vue-cli，打开命令行输入如下命令：（默认你是安装好了node和npm）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用vue-cli搭建项目"><span class="nav-number">2.</span> <span class="nav-text">使用vue-cli搭建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在命令行输入如下命令："><span class="nav-number">2.1.</span> <span class="nav-text">在命令行输入如下命令：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#接着它会询问你几个问题："><span class="nav-number">2.1.1.</span> <span class="nav-text">接着它会询问你几个问题：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-cli搭建项目的目录结构"><span class="nav-number">3.</span> <span class="nav-text">vue-cli搭建项目的目录结构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#created-生命周期问题"><span class="nav-number">1.</span> <span class="nav-text">created 生命周期问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组遍历中出现-should-hava-explicit-keys-错误"><span class="nav-number">2.</span> <span class="nav-text">数组遍历中出现 should hava explicit keys 错误</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#退出页面重新进入，页面数据未初始化"><span class="nav-number">3.</span> <span class="nav-text">退出页面重新进入，页面数据未初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义的组件不支持添加-class"><span class="nav-number">4.</span> <span class="nav-text">自定义的组件不支持添加 class</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#textarea-组件文字穿透问题"><span class="nav-number">5.</span> <span class="nav-text">textarea 组件文字穿透问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相对路径的图片不显示"><span class="nav-number">6.</span> <span class="nav-text">相对路径的图片不显示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新增-page-页面，使用微信开发者工具出现报错"><span class="nav-number">7.</span> <span class="nav-text">新增 page 页面，使用微信开发者工具出现报错</span></a></li></ol></div>
             
           </div>
         </section>
