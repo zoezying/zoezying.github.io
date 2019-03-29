@@ -1,0 +1,698 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="摘要:    探索对象的浅拷贝和深拷贝。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对象的浅拷贝和深拷贝">
+<meta property="og:url" content="https://zoezying.github.io/2018/04/20/对象的浅拷贝和深拷贝/index.html">
+<meta property="og:site_name" content="小志的blog">
+<meta property="og:description" content="摘要:    探索对象的浅拷贝和深拷贝。">
+<meta property="og:image" content="https://zoezying.github.io/images/20190329152533.jpg">
+<meta property="og:image" content="https://zoezying.github.io/images/13835400-a82add0ed9ab5249.png">
+<meta property="og:image" content="https://zoezying.github.io/images/13835400-3fbba4a7c23f585a.png">
+<meta property="og:updated_time" content="2019-03-29T07:58:40.253Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对象的浅拷贝和深拷贝">
+<meta name="twitter:description" content="摘要:    探索对象的浅拷贝和深拷贝。">
+<meta name="twitter:image" content="https://zoezying.github.io/images/20190329152533.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '小Z'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://zoezying.github.io/2018/04/20/对象的浅拷贝和深拷贝/"/>
+
+  <title> 对象的浅拷贝和深拷贝 | 小志的blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小志的blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">每天都要动力十足</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                对象的浅拷贝和深拷贝
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-04-20T11:55:41+08:00" content="2018-04-20">
+              2018-04-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/20/对象的浅拷贝和深拷贝/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/20/对象的浅拷贝和深拷贝/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘要:<br>    探索对象的浅拷贝和深拷贝。<br><a id="more"></a></p>
+<h1 id="1-浅拷贝"><a href="#1-浅拷贝" class="headerlink" title="1 浅拷贝"></a>1 浅拷贝</h1><p>对于浅拷贝的定义可以理解为：创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值，如果属性是引用类型，拷贝的就是内存地址，所以如果其中一个对象改变了这个地址，就会影响到另一个对象。</p>
+<p>以下是一些JavaScript提供的浅拷贝方法</p>
+<h2 id="1-1-Object-assign"><a href="#1-1-Object-assign" class="headerlink" title="1.1 Object.assign()"></a>1.1 Object.assign()</h2><p>ES6中拷贝对象的方法，接受的第一个参数是拷贝的目标，剩下的参数是拷贝的源对象（可以是多个）。如果目标对象中的属性具有相同的键，则属性将被源对象中的属性覆盖。后面的源对象的属性将类似地覆盖前面的源对象的属性。</p>
+<p>语法：<code>Object.assign(target, ...sources)  //  target目标对象, sources源对象。</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> boj = &#123; a: <span class="number">0</span>, b: &#123; c: <span class="number">0</span> &#125; &#125;</span><br><span class="line"><span class="keyword">let</span> copy = <span class="built_in">Object</span>.assign(&#123;&#125;, boj)</span><br><span class="line"></span><br><span class="line">boj.a = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(boj))  <span class="comment">// &#123; a: 1, b: &#123; c: 0 &#125; &#125; </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(copy))  <span class="comment">// &#123; a: 0, b: &#123; c: 0 &#125; &#125; </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  假如源对象的属性值是一个对象的引用，那么它也只是指向那个引用。</span></span><br><span class="line">copy.b.c = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(boj))  <span class="comment">// &#123; a: 1, b: &#123; c: 3 &#125; &#125; </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(copy))  <span class="comment">// &#123; a: 0, b: &#123; c: 3 &#125; &#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>Object.assign还有一些注意的点是:</strong></p>
+<ol>
+<li>不会拷贝对象继承的属性</li>
+<li>不会拷贝不可枚举的属性</li>
+<li>可以拷贝Symbol类型</li>
+<li>不会跳过那些值为 null 或 undefined 的源对象。</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const obj = Object.create(&#123; foo: <span class="number">1</span> &#125;, &#123;  // foo 是个继承属性。  </span><br><span class="line"><span class="attr">  a:</span> &#123;</span><br><span class="line"><span class="attr">    value:</span> <span class="number">2</span>  // a 是个不可枚举属性。</span><br><span class="line">  &#125;,</span><br><span class="line"><span class="attr">  b:</span> &#123;</span><br><span class="line"><span class="attr">    value:</span> <span class="number">3</span>,</span><br><span class="line"><span class="attr">    enumerable:</span> <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line"><span class="attr">  c:</span> &#123;</span><br><span class="line"><span class="attr">    value:</span> <span class="literal">null</span>,</span><br><span class="line"><span class="attr">    enumerable:</span> <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line"><span class="attr">  d:</span> &#123;</span><br><span class="line"><span class="attr">    value:</span> undefined,</span><br><span class="line"><span class="attr">    enumerable:</span> <span class="literal">true</span></span><br><span class="line">  &#125;,</span><br><span class="line"><span class="attr">  f:</span> &#123;</span><br><span class="line"><span class="attr">    value:</span> Symbol(<span class="number">1</span>),</span><br><span class="line"><span class="attr">    enumerable:</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">const copy = Object.assign(&#123;&#125;, obj)</span><br><span class="line"></span><br><span class="line">console.log(<span class="string">'obj'</span>, obj)</span><br><span class="line">console.log(<span class="string">'copy'</span>, copy)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/20190329152533.jpg" alt="Object.assign()"></p>
+<h2 id="1-2-扩展运算符"><a href="#1-2-扩展运算符" class="headerlink" title="1.2 扩展运算符"></a>1.2 扩展运算符</h2><p>利用扩展运算符可以在构造字面量对象时,进行克隆或者属性拷贝。</p>
+<p>语法：<code>let objClone = { ...obj }</code></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; <span class="selector-tag">a</span>: <span class="number">0</span>, <span class="selector-tag">b</span>: &#123; c: <span class="number">0</span> &#125; &#125;</span><br><span class="line">let copy = &#123; ..<span class="selector-class">.obj</span> &#125;</span><br><span class="line"></span><br><span class="line">obj<span class="selector-class">.a</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">console.log(JSON.stringify(obj))  <span class="comment">// &#123; a: 1, b: &#123; c: 0 &#125; &#125; </span></span><br><span class="line">console.log(JSON.stringify(copy))  <span class="comment">// &#123; a: 0, b: &#123; c: 0 &#125; &#125; </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  假如源对象的属性值是一个对象的引用，那么它也只是指向那个引用。</span></span><br><span class="line">copy<span class="selector-class">.b</span><span class="selector-class">.c</span> = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">console.log(JSON.stringify(obj))  <span class="comment">// &#123; a: 1, b: &#123; c: 3 &#125; &#125; </span></span><br><span class="line">console.log(JSON.stringify(copy))  <span class="comment">// &#123; a: 0, b: &#123; c: 3 &#125; &#125;</span></span><br></pre></td></tr></table></figure>
+<h1 id="2-深拷贝"><a href="#2-深拷贝" class="headerlink" title="2 深拷贝"></a>2 深拷贝</h1><p>浅拷贝只在根属性上在堆内存中创建了一个新的的对象，复制了基本类型的值,但是复杂数据类型也就是对象则是拷贝相同的地址，而深拷贝则是对于复杂数据类型在堆内存中开辟了一块内存地址用于存放复制的对象并且把原有的对象复制过来，这2个对象是相互独立的,也就是2个不同的地址。</p>
+<h2 id="2-1-JSON-stringify"><a href="#2-1-JSON-stringify" class="headerlink" title="2.1 JSON.stringify()"></a>2.1 JSON.stringify()</h2><p>JSON.stringify()是目前前端开发过程中最常用的深拷贝方式，原理是把一个对象序列化成为一个JSON字符串，将对象的内容转换成字符串的形式再保存在磁盘上，再用JSON.parse()反序列化将JSON字符串变成一个新的对象。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123; <span class="variable">a:1</span>, <span class="variable">b:</span>[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] &#125;</span><br><span class="line"><span class="keyword">let</span> str = JSON.stringify(obj)</span><br><span class="line"><span class="keyword">let</span> <span class="keyword">copy</span> = JSON.parse(str)</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(<span class="keyword">copy</span>)  //  &#123; <span class="variable">a:1</span>, <span class="variable">b:</span>[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] &#125;</span><br><span class="line"></span><br><span class="line">obj.<span class="keyword">a</span> = <span class="number">2</span></span><br><span class="line">obj.<span class="keyword">b</span>.push(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(obj)   //  &#123; <span class="variable">a:2</span>, <span class="variable">b:</span>[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>] &#125;</span><br><span class="line">console.<span class="built_in">log</span>(<span class="keyword">copy</span>)  //  &#123; <span class="variable">a:1</span>, <span class="variable">b:</span>[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>通过JSON.stringify实现深拷贝有几点要注意</strong></p>
+<ol>
+<li>拷贝的对象的值中如果有函数,undefined,symbol则经过JSON.stringify()序列化后的JSON字符串中这个键值对会消失</li>
+<li>无法拷贝不可枚举的属性，无法拷贝对象的原型链</li>
+<li>拷贝Date引用类型会变成字符串</li>
+<li>拷贝RegExp引用类型会变成空对象</li>
+<li>对象中含有NaN、Infinity和-Infinity，则序列化的结果会变成null</li>
+<li>无法拷贝对象的循环应用(即obj[key] = obj)</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Obj</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.func = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert(<span class="number">1</span>) </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.obj = &#123;a:<span class="number">1</span>&#125;</span><br><span class="line">    <span class="keyword">this</span>.arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">this</span>.und = <span class="literal">undefined</span></span><br><span class="line">    <span class="keyword">this</span>.reg = <span class="regexp">/123/</span></span><br><span class="line">    <span class="keyword">this</span>.date = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">this</span>.NaN = <span class="literal">NaN</span></span><br><span class="line">    <span class="keyword">this</span>.infinity = <span class="literal">Infinity</span></span><br><span class="line">    <span class="keyword">this</span>.sym = <span class="built_in">Symbol</span>(<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> Obj()</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'innumerable'</span>, &#123;</span><br><span class="line">    enumerable:<span class="literal">false</span>,</span><br><span class="line">    value:<span class="string">'innumerable'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'obj'</span>,obj)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = <span class="built_in">JSON</span>.stringify(obj)</span><br><span class="line"><span class="keyword">let</span> copy = <span class="built_in">JSON</span>.parse(str)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'copy'</span>,copy)</span><br></pre></td></tr></table></figure>
+<p><img src="/images/13835400-a82add0ed9ab5249.png" alt="JSON.stringify()"></p>
+<p>可以看到除了Object对象和数组其他基本都和原来的不一样，obj1的constructor是Obj(),而obj2的constructor指向了Object()，而对于循环引用则是直接报错了。</p>
+<p>虽说通过JSON.stringify()方法深拷贝对象也有很多无法实现的功能，但是对于日常的开发需求(对象和数组)，使用这种方法是最简单和快捷的。</p>
+<h2 id="2-2-利用递归实现深拷贝"><a href="#2-2-利用递归实现深拷贝" class="headerlink" title="2.2 利用递归实现深拷贝"></a>2.2 利用递归实现深拷贝</h2><p>使用for in遍历传入参数的值，如果值是引用类型则再次调用deepClone函数，并且传入第一次调用deepClone参数的值作为第二次调用deepClone的参数，如果不是引用类型就直接复制。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> obj = &#123;</span><br><span class="line">    <span class="selector-tag">a</span>: &#123;</span><br><span class="line">      <span class="selector-tag">b</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function deepClone (obj) &#123;</span><br><span class="line">    let cloneObj = &#123;&#125;  <span class="comment">//  在堆内存中新建一个对象</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(let key <span class="keyword">in</span> obj)&#123;  <span class="comment">//  遍历参数的键</span></span><br><span class="line">       <span class="keyword">if</span>(typeof obj[key] ===<span class="string">'object'</span>)&#123; </span><br><span class="line">          cloneObj[key] = deepClone(obj[key]) <span class="comment">//  值是对象就再次调用函数</span></span><br><span class="line">       &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">           cloneObj[key] = obj[key]  <span class="comment">//  基本类型直接复制值</span></span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return cloneObj </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">var</span> copy = deepClone(obj)</span><br><span class="line"></span><br><span class="line">obj<span class="selector-class">.a</span><span class="selector-class">.b</span> = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">console.log(copy)  <span class="comment">//  &#123; a: &#123; b: 1 &#125; &#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>但是还有很多问题：</strong></p>
+<ul>
+<li>首先这个deepClone函数并不能复制不可枚举的属性以及Symbol类型</li>
+<li>这里只是针对Object引用类型的值做的循环迭代，而对于Array,Date,RegExp,Error,Function引用类型无法正确拷贝</li>
+<li>对象循环引用成环了的情况</li>
+</ul>
+<h2 id="2-3-改进版深拷贝方法"><a href="#2-3-改进版深拷贝方法" class="headerlink" title="2.3 改进版深拷贝方法"></a>2.3 改进版深拷贝方法</h2><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isComplexDataType = obj =&gt; (<span class="keyword">typeof</span> obj === <span class="string">'object'</span> || <span class="keyword">typeof</span> obj === <span class="string">'function'</span>) &amp;&amp; (obj !== <span class="literal">null</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> deepClone = <span class="function"><span class="keyword">function</span> (<span class="params">obj, hash = new WeakMap(</span>)) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (obj.constructor === <span class="built_in">Date</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(obj)   <span class="comment">//  日期对象就返回一个新的日期对象</span></span><br><span class="line">    <span class="keyword">if</span> (obj.constructor === <span class="built_in">RegExp</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">RegExp</span>(obj)  <span class="comment">//  正则对象就返回一个新的正则对象</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//  如果成环了,参数obj = obj.loop = 最初的obj 会在WeakMap中找到第一次放入的obj提前返回第一次放入WeakMap的cloneObj</span></span><br><span class="line">    <span class="keyword">if</span> (hash.has(obj)) <span class="keyword">return</span> hash.get(obj)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> allDesc = <span class="built_in">Object</span>.getOwnPropertyDescriptors(obj)  <span class="comment">//  遍历传入参数所有键的特性</span></span><br><span class="line">    <span class="keyword">let</span> cloneObj = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.getPrototypeOf(obj), allDesc)  <span class="comment">//  继承原型链</span></span><br><span class="line"></span><br><span class="line">    hash.set(obj, cloneObj)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> <span class="built_in">Reflect</span>.ownKeys(obj)) &#123;  <span class="comment">//Reflect.ownKeys(obj)可以拷贝不可枚举属性和符号类型</span></span><br><span class="line">        <span class="comment">//  如果值是引用类型(非函数)则递归调用deepClone</span></span><br><span class="line">        cloneObj[key] =</span><br><span class="line">            (isComplexDataType(obj[key]) &amp;&amp; <span class="keyword">typeof</span> obj[key] !== <span class="string">'function'</span>) ?</span><br><span class="line">                deepClone(obj[key], hash) : obj[key]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cloneObj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attribute">num</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attribute">str</span>: <span class="string">''</span>,</span><br><span class="line">    <span class="attribute">boolean</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attribute">unf</span>: <span class="literal">undefined</span>,</span><br><span class="line">    <span class="attribute">nul</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attribute">obj</span>: &#123;</span><br><span class="line">        <span class="attribute">name</span>: <span class="string">'我是一个对象'</span>,</span><br><span class="line">        <span class="attribute">id:</span><span class="string"> 1</span><br><span class="line">    &#125;,</span><br><span class="line">    arr</span>: [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="attribute">func</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'我是一个函数'</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attribute">date</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">0</span>),</span><br><span class="line">    <span class="attribute">reg</span>: <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'/我是一个正则/ig'</span>),</span><br><span class="line">    [<span class="built_in">Symbol</span>(<span class="string">'1'</span>)]: <span class="number">1</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj, <span class="string">'innumerable'</span>, &#123;</span><br><span class="line">    <span class="attribute">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attribute">value</span>: <span class="string">'不可枚举属性'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">obj = <span class="built_in">Object</span>.create(obj, <span class="built_in">Object</span>.getOwnPropertyDescriptors(obj))</span><br><span class="line"></span><br><span class="line">obj.loop = obj</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> cloneObj = deepClone(obj)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'obj'</span>, obj)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'cloneObj'</span>, cloneObj)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> <span class="built_in">Object</span>.keys(cloneObj)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> cloneObj[key] === <span class="string">'object'</span> || <span class="keyword">typeof</span> cloneObj[key] === <span class="string">'function'</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;key&#125;</span>相同吗？ `</span>, cloneObj[key] === obj[key])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/13835400-3fbba4a7c23f585a.png" alt="改进版深拷贝方法"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/20/vuex的使用/" rel="next" title="vuex的使用">
+                <i class="fa fa-chevron-left"></i> vuex的使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/29/JavaScript-函数防抖和节流/" rel="prev" title="JavaScript 函数防抖和节流">
+                JavaScript 函数防抖和节流 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/04/20/对象的浅拷贝和深拷贝/"
+           data-title="对象的浅拷贝和深拷贝" data-url="https://zoezying.github.io/2018/04/20/对象的浅拷贝和深拷贝/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Zzy" />
+          <p class="site-author-name" itemprop="name">Zzy</p>
+          <p class="site-description motion-element" itemprop="description">记录我的一切</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-浅拷贝"><span class="nav-number">1.</span> <span class="nav-text">1 浅拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Object-assign"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 Object.assign()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-扩展运算符"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 扩展运算符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-深拷贝"><span class="nav-number">2.</span> <span class="nav-text">2 深拷贝</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-JSON-stringify"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 JSON.stringify()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-利用递归实现深拷贝"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 利用递归实现深拷贝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-改进版深拷贝方法"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 改进版深拷贝方法</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zzy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzying-ds"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
