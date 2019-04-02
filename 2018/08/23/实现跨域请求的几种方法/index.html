@@ -108,7 +108,7 @@
 <meta property="og:url" content="https://zoezying.github.io/2018/08/23/实现跨域请求的几种方法/index.html">
 <meta property="og:site_name" content="小志的blog">
 <meta property="og:description" content="摘要:    实现跨域请求的几种方法。">
-<meta property="og:updated_time" content="2018-08-22T17:51:11.040Z">
+<meta property="og:updated_time" content="2019-03-29T11:32:55.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实现跨域请求的几种方法">
 <meta name="twitter:description" content="摘要:    实现跨域请求的几种方法。">
@@ -341,17 +341,19 @@
 
       
         <p>摘要:<br>    实现跨域请求的几种方法。<br><a id="more"></a></p>
-<h1 id="JSONP跨域"><a href="#JSONP跨域" class="headerlink" title="JSONP跨域"></a>JSONP跨域</h1><p>JSONP（JSON with Padding）是数据格式JSON的一种“使用模式”，可以让网页从别的网域要数据。根据 XmlHttpRequest 对象受到同源策略的影响，而利用<code>&lt;script&gt;</code>元素的这个开放策略，网页可以得到从其他来源动态产生的JSON数据，而这种使用模式就是所谓的 JSONP。用 JSONP 抓到的数据并不是 JSON ，而是任意的 JavaScript，用 JavaScript 解释器运行而不是用JSON 解析器解析。所有，通过 Chrome 查看所有JSONP发送的Get请求都是js类型，而非 XHR。</p>
+<h1 id="JSONP跨域"><a href="#JSONP跨域" class="headerlink" title="JSONP跨域"></a>JSONP跨域</h1><p>JSONP（JSON with Padding）是数据格式 JSON 的一种“使用模式”，可以让网页从别的网域要数据。根据 XmlHttpRequest 对象受到同源策略的影响，而利用<code>&lt;script&gt;</code>元素的这个开放策略，网页可以得到从其他来源动态产生的JSON数据，而这种使用模式就是所谓的 JSONP。用 JSONP 抓到的数据并不是 JSON ，而是任意的 JavaScript，用 JavaScript 解释器运行而不是用 JSON 解析器解析。所以，通过 Chrome 查看所有JSONP发送的Get请求都是js类型，而非 XHR。</p>
 <p>缺点： </p>
 <ol>
 <li>只能使用Get请求 </li>
 <li>不能注册success、error等事件监听函数，不能很容易的确定JSONP请求是否失败</li>
 <li>JSONP是从其他域中加载代码执行，容易受到跨站请求伪造的攻击，其安全性无法确保</li>
 </ol>
-<h1 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h1><p>​Cross-Origin Resource Sharing（CORS）跨域资源共享是一份浏览器技术的规范，提供了 Web 服务从不同域传来沙盒脚本的方法，以避开浏览器的同源策略，确保安全的跨域数据传输。现代浏览器使用CORS在API容器如XMLHttpRequest来减少HTTP请求的风险来源。与 JSONP 不同，CORS 除了 GET 要求方法以外也支持其他的 HTTP 要求。服务器一般需要增加如下响应头的一种或几种：<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Access</span>-Control-Allow-Origin: *</span><br><span class="line"><span class="keyword">Access</span>-Control-Allow-Methods: POST, GET, OPTIONS</span><br><span class="line"><span class="keyword">Access</span>-Control-Allow-Headers: X-PINGOTHER, Content-<span class="keyword">Type</span></span><br><span class="line"><span class="keyword">Access</span>-Control-<span class="built_in">Max</span>-Age: <span class="number">86400</span></span><br></pre></td></tr></table></figure></p>
-<p>跨域请求默认不会携带Cookie信息，如果需要携带，请配置下述参数：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Access-Control-Allow-Credentials"</span>: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Ajax设置</span></span><br><span class="line"><span class="string">"withCredentials"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="修改document-domain跨子域"><a href="#修改document-domain跨子域" class="headerlink" title="修改document.domain跨子域"></a>修改document.domain跨子域</h1><p>前提条件：这两个域名必须属于同一个基础域名!而且所用的协议，端口都要一致，否则无法利用document.domain进行跨域，所以只能跨子域。</p>
-<p>​在根域范围内，允许把domain属性的值设置为它的上一级域。例如，在<code>a.xxx.com</code>域内，可以把domain设置为 <code>xxx.com</code> 但不能设置为 <code>xxx.org</code> 或者<code>com</code>。</p>
+<h1 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h1><p>​Cross-Origin Resource Sharing（CORS）跨域资源共享是一份浏览器技术的规范，提供了 Web 服务从不同域传来沙盒脚本的方法，以避开浏览器的同源策略，确保安全的跨域数据传输。现代浏览器使用 CORS 在API容器如 XMLHttpRequest 来减少 HTTP 请求的风险来源。与 JSONP 不同，CORS 除了 GET 要求方法以外也支持其他的 HTTP 要求。服务器一般需要增加如下响应头的一种或几种：</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Access</span>-Control-Allow-Origin: *</span><br><span class="line"><span class="keyword">Access</span>-Control-Allow-Methods: POST, GET, OPTIONS</span><br><span class="line"><span class="keyword">Access</span>-Control-Allow-Headers: X-PINGOTHER, Content-<span class="keyword">Type</span></span><br><span class="line"><span class="keyword">Access</span>-Control-<span class="built_in">Max</span>-Age: <span class="number">86400</span></span><br></pre></td></tr></table></figure>
+<p>跨域请求默认不会携带Cookie信息，如果需要携带，请配置下述参数：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Access-Control-Allow-Credentials"</span>: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Ajax设置</span></span><br><span class="line"><span class="string">"withCredentials"</span>: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h1 id="修改document-domain跨子域"><a href="#修改document-domain跨子域" class="headerlink" title="修改document.domain跨子域"></a>修改document.domain跨子域</h1><p>前提条件：这两个域名必须属于同一个基础域名!而且所用的协议，端口都要一致，否则无法利用 document.domain 进行跨域，所以只能跨子域。</p>
+<p>​在根域范围内，允许把 domain 属性的值设置为它的上一级域。例如，在<code>a.xxx.com</code>域内，可以把domain设置为 <code>xxx.com</code> 但不能设置为 <code>xxx.org</code> 或者<code>com</code>。</p>
 <p>​现在存在两个域名<code>a.xxx.com</code>和<code>b.xxx.com</code>。在<code>a.xxx.com</code>下嵌入<code>b.xxx.com</code>的页面，由于其document.name不一致，无法在<code>a.xxx.com</code>下操作<code>b.xxx.com</code>的js。可以在<code>a.xxx.com</code>和<code>b.xxx.com</code>下通过js将document.name = ‘xxx.com’；设置一致，来达到互相访问的作用。</p>
 <h1 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h1><p>WebSocket protocol 是HTML5一种新的协议。它实现了浏览器与服务器全双工通信，同时允许跨域通讯，是server push技术的一种很棒的实现。</p>
 <p><strong>需要注意：</strong><br>WebSocket对象不支持DOM 2级事件侦听器，必须使用DOM 0级语法分别定义各个事件。</p>
@@ -471,7 +473,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -479,7 +481,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -488,7 +490,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

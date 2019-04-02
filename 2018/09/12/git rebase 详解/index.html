@@ -1,0 +1,667 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="git," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="摘要:    git 合并代码方式主要有两种方式，分别为：merge 处理和 rebase 处理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git rebase 的详解和 git merge 的区别">
+<meta property="og:url" content="https://zoezying.github.io/2018/09/12/git rebase 详解/index.html">
+<meta property="og:site_name" content="小志的blog">
+<meta property="og:description" content="摘要:    git 合并代码方式主要有两种方式，分别为：merge 处理和 rebase 处理。">
+<meta property="og:updated_time" content="2019-04-02T04:01:24.827Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git rebase 的详解和 git merge 的区别">
+<meta name="twitter:description" content="摘要:    git 合并代码方式主要有两种方式，分别为：merge 处理和 rebase 处理。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '小Z'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://zoezying.github.io/2018/09/12/git rebase 详解/"/>
+
+  <title> git rebase 的详解和 git merge 的区别 | 小志的blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小志的blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">每天都要动力十足</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                git rebase 的详解和 git merge 的区别
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-12T17:45:25+08:00" content="2018-09-12">
+              2018-09-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/09/12/git rebase 详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/09/12/git rebase 详解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘要:<br>    git 合并代码方式主要有两种方式，分别为：merge 处理和 rebase 处理。<br><a id="more"></a></p>
+<p>git 合并代码方式主要有两种方式，分别为：</p>
+<ul>
+<li>merge 处理，这是大家比较能理解的方式。</li>
+<li>rebase 处理，中文此处翻译为衍合过程。</li>
+</ul>
+<p><code>git rebase</code>操作讲解例子：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/<span class="built_in">local</span>/test</span><br><span class="line">mkdir hellogit<span class="comment"> //  创建hellogit目录</span></span><br><span class="line">cd hellogit  </span><br><span class="line">git init      <span class="comment"> //  初始化git项目</span></span><br><span class="line">vim readme    <span class="comment"> //  新建readme文件，往里边添加内容</span></span><br><span class="line">git <span class="built_in">add</span> .     <span class="comment"> //  提交内容</span></span><br><span class="line">git commit -m <span class="string">'init project c1'</span> <span class="comment"> //  git系统默认创建一个master分支</span></span><br><span class="line"><span class="comment"></span><br><span class="line">// 接着我们创建一个dev分支，在dev分支上添加内容</span></span><br><span class="line">git checkout -b dev <span class="comment"> //  此处其实是两步 git branch dev 加上 git checkout dev</span></span><br><span class="line">vim readme <span class="comment"> //  在原来基础上增加上内容</span></span><br><span class="line">git <span class="built_in">add</span> .</span><br><span class="line">git commit -m <span class="string">'add hello world c2'</span></span><br><span class="line"><span class="comment"></span><br><span class="line">// 切换回到master分支</span></span><br><span class="line">git checkout master</span><br><span class="line">vim readme <span class="comment"> //  编辑 readme 文件，在第二行增加 hello world from master 内容</span></span><br><span class="line"><span class="comment"></span><br><span class="line">//  此处先埋个点，因为此处会和dev分支上做的修改冲突</span></span><br><span class="line">git <span class="built_in">add</span> .</span><br><span class="line">git commit -m <span class="string">'add hello world c3'</span></span><br><span class="line">vim hello.py <span class="comment"> //  新添加一个hello.py文件</span></span><br><span class="line">git <span class="built_in">add</span> .</span><br><span class="line">git commit -m <span class="string">'add hello.py c4'</span></span><br><span class="line"><span class="comment"></span><br><span class="line">// 切换回到dev分支</span></span><br><span class="line">git checkout dev</span><br><span class="line">vim helloworld.py <span class="comment"> //  添加上helloworld.py文件</span></span><br><span class="line">git <span class="built_in">add</span> .</span><br><span class="line">git commit -m <span class="string">'add helloworld.py c5'</span></span><br></pre></td></tr></table></figure>
+<p><strong>至此，我们简单分析下情况为：</strong></p>
+<p>master 分支，节点链表指向为：c1&lt;–c3&lt;–c4<br>dev分支，节点链表指向为：c1&lt;–c2&lt;–c5<br>master 分支和 dev 分支祖先为 c1，假定在 master 分支上做<code>git merge dev</code>合并，得到的提交历史为：<br>c1&lt;–c2&lt;–c3&lt;–c4&lt;–c5&lt;–c6（c1、c4、c5 做了一次三方合并发现冲突，手工处理完毕后<code>git add/commit</code>增加了提交节点 c6）<br>采用<code>git merge dev</code>处理提交 log 是按照时间戳先后顺序的。</p>
+<p>假定采用的是<code>git rebase</code>处理过程为：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev</span><br><span class="line">git rebase <span class="keyword">master</span>  <span class="title">将 dev</span> 上的 c2、c5 在 <span class="keyword">master</span> <span class="title">分支上做一次衍合处理</span><br><span class="line"></span><br><span class="line">//  git</span>提示出现了代码冲突，此处为之前埋下的冲突点，处理完毕后</span><br><span class="line">git add readme  //  添加冲突处理后的文件</span><br><span class="line">git rebase --continue  //  加上 --continue 参数让 rebase 继续处理</span><br></pre></td></tr></table></figure>
+<p>此处处理后的节点为：<br>c1 c3 c4 c2 c5 此处不是按照时间顺序处理的<br>综合表现，<code>git rebase</code>可以得到一个更加简洁的提交历史，无需多了 c6。<br>处理完毕后，<code>git checkout master</code>加上<code>git merge dev</code>，git 会智能采用 f-f 处理。</p>
+<p>总结为：<br><code>git rebase</code>过程相比较<code>git merge</code>合并整合得到的结果没有任何区别，但是通过<code>git rebase</code>衍合能产生一个更为整洁的提交历史。<br>如果观察一个衍合过的分支的历史提交记录，看起来会更清楚：仿佛所有修改都是在一根线上先后完成的，尽管实际上它们原来是同时并行发生的。</p>
+<p>一般我们使用衍合的目的，是想要得到一个能在远程分支上干净应用的补丁，比如某个项目你不是维护者，但是想帮点忙，最好使用衍合处理。<br>先在自己的一个分支进行开发，当准备向主项目提交补丁的时候，根据最新的 orgin/master 进行一次衍合操作然后再提交，这样维护者就不需要任何整合工作。</p>
+<p>实际为：把解决分支补丁同最新主干代码之间的冲突的责任，划转给由提交补丁的人来解决。<br>作为维护项目的人只需要根据你提供的仓库地址做一次快进合并，或者直接采纳你提交的补丁。</p>
+<p>衍合的风险，请务必遵循如下准则：<br>一旦分支中的提交对象发布到公共仓库，就千万不要对该分支进行衍合操作。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag">#git</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/29/JavaScript 编程规范（二）/" rel="next" title="JavaScript 编程规范（二）">
+                <i class="fa fa-chevron-left"></i> JavaScript 编程规范（二）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/07/用mpvue写小程序遇到的一些问题/" rel="prev" title="用 mpvue 框架开发小程序遇到的一些问题">
+                用 mpvue 框架开发小程序遇到的一些问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/09/12/git rebase 详解/"
+           data-title="git rebase 的详解和 git merge 的区别" data-url="https://zoezying.github.io/2018/09/12/git rebase 详解/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Zzy" />
+          <p class="site-author-name" itemprop="name">Zzy</p>
+          <p class="site-description motion-element" itemprop="description">记录我的一切</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zzy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzying-ds"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

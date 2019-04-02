@@ -1,0 +1,718 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="摘要:    深入浅出 JS 的封装与继承。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出 JS 的封装与继承">
+<meta property="og:url" content="https://zoezying.github.io/2018/04/20/深入浅出JS的封装与继承/index.html">
+<meta property="og:site_name" content="小志的blog">
+<meta property="og:description" content="摘要:    深入浅出 JS 的封装与继承。">
+<meta property="og:image" content="https://zoezying.github.io/images/818663-20151107114455352-805715592.png">
+<meta property="og:image" content="https://zoezying.github.io/images/818663-20151107115325852-1245413297.png">
+<meta property="og:image" content="https://zoezying.github.io/images/818663-20151107121827227-1050626216.png">
+<meta property="og:image" content="https://zoezying.github.io/images/818663-20151107151033305-596115714.png">
+<meta property="og:updated_time" content="2019-04-02T03:44:35.247Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入浅出 JS 的封装与继承">
+<meta name="twitter:description" content="摘要:    深入浅出 JS 的封装与继承。">
+<meta name="twitter:image" content="https://zoezying.github.io/images/818663-20151107114455352-805715592.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '小Z'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://zoezying.github.io/2018/04/20/深入浅出JS的封装与继承/"/>
+
+  <title> 深入浅出 JS 的封装与继承 | 小志的blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小志的blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">每天都要动力十足</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深入浅出 JS 的封装与继承
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-04-20T11:55:41+08:00" content="2018-04-20">
+              2018-04-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/20/深入浅出JS的封装与继承/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/20/深入浅出JS的封装与继承/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘要:<br>    深入浅出 JS 的封装与继承。<br><a id="more"></a><br>JS 虽然是一个面向对象的语言，但是不是典型的面向对象语言。Java/C++ 的面向对象是 object - class 的关系，而 JS 是 object - object 的关系，中间通过原型 prototype 连接，父类和子类形成一条原型链。本文通过分析JS的对象的封装，再探讨正确实现继承的方式，然后讨论几个问题，最后再对 ES6 新引入的类 class 关键字作一个简单的说明。</p>
+<p>JS的类其实是一个函数 function，由于不是典型的 OOP 的类，因此也叫伪类。理解 JS 的类，需要对 JS 里的 function 有一个比较好的认识。首先，function 本身就是一个 object，可以当作函数的参数，也可以当作返回值，跟普通的 object 无异。然后 function 可以当作一个类来使用，例如要实现一个String类：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> MyString = function (str) &#123;</span><br><span class="line">  this<span class="selector-class">.content</span> = str</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="selector-tag">var</span> name = new MyString(<span class="string">"hanMeimei"</span>)</span><br><span class="line"><span class="selector-tag">var</span> addr = new MyString(<span class="string">"China"</span>)</span><br><span class="line"></span><br><span class="line">console.log(name<span class="selector-class">.content</span> + <span class="string">" live in "</span> + addr.<span class="attribute">content</span>)</span><br></pre></td></tr></table></figure></p>
+<p>第一行声明了一个 MyString 的函数，得到一个 MyString 类，同时这个函数也是 MyString 的构造函数。第5行 new 一个对象，会去执行构造函数，this 指向新产生的对象，第2行给这个对象添加一个 content 的属性，然后将新对象的地址赋值给 name。第6行又去新建一个 object，注意这里的 this 指向了新的对象，因此新产生的 content 和前面是不一样的。</p>
+<p>上面的代码在浏览器运行有一点问题，因为这段代码是在全局作用域下运行，定义的 name 变量也是全局的，因此实际上执行<code>var name = new MyString(&quot;&quot;)</code>等同于<code>window.name = new MyString(&quot;&quot;)</code>，由于 name 是 window 已经存在的一个变量，作为<code>window.open</code>的第二个参数，可用来跨域的时候传数据。但由于<code>window.name</code>不支持设置成自定义函数的实例，因此设置无效，还是保持默认值：值为<code>&quot;[object Object]&quot;</code>的 String。解决办法是把代码的运行环境改成局部的，也就是说用一个 function 包起来：</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">function</span>()&#123;</span><br><span class="line">  var name = new MyString(<span class="string">"hanMeimei"</span>)</span><br><span class="line"></span><br><span class="line">  console.log(<span class="name">name.content</span>)  //  正确，输出hanMeimei</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p>所以从此处看到，代码用一个 function 包起来，不去污染全局作用域，还是挺有必要的。接下来，回到正题。</p>
+<p>JS 里的每一个 function 都有一个 prototype 属性，这个属性指向一个普通的 object，即存放了这个 object 的地址。这个 function new 出来的每个实例都会被带上一个指针（通常为 <strong>proto</strong> ）指向 prototype 指向的那个 object。其过程类似于：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> name = new MyString()            <span class="comment">//  产生一个对象，执行构造函数</span></span><br><span class="line">name.__proto__ = MyString<span class="selector-class">.prototype</span>  <span class="comment">//  添加一个 __proto__属性，指向类的prototype（这行代码仅为说明）</span></span><br></pre></td></tr></table></figure>
+<p>如下图所示，name 和 addr 的 <strong>proto</strong> 指向 MyString 的 prototype 对象：</p>
+<p><img src="/images/818663-20151107114455352-805715592.png" alt="MyString"></p>
+<p>可以看出在 JS 里，将类的方法放在 function 的 prototype 里面，它的每个实例都将获得类的方法。<br>现在为 MyString 添加一个 toString 的方法：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MyString.prototype.toString = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.content</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>MyString 的 prototype 对象 (object) 将会添加一个新的属性。</p>
+<p><img src="/images/818663-20151107115325852-1245413297.png" alt="MyString"></p>
+<p>这个时候实例name和addr就拥有了这个方法，调用这个方法：</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(<span class="built_in">name</span>.<span class="built_in">toString</span>())  <span class="comment">//  输出hanMeimei</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">name</span> + <span class="string">" lives in "</span> + addr)  <span class="comment">//  “+”连接字符时，自动调用 toString，输出 hanMeimei lives in China</span></span><br></pre></td></tr></table></figure>
+<p>这样就实现了基本的封装——类的属性在构造函数里定义，如 MyString 的 content；而类的方法在函数的 prototype 里添加，如 MyString 的 toString 方法。</p>
+<p>这个时候，考虑一个基础的问题，为什么在原型上添加的方法就可以被类的对象引用到呢？因为JS首先会在该对象上查找该方法，如果没有找到就会去它的原型上查找。例如执行 name.toString()，第一步 name 这个 object 本身没有toString（只有一个content属性），于是向 name 的原型对象查找，即 <strong>proto</strong> 指向的那个 object，发现有 toString 这个属性，因此就找到了。</p>
+<p>要是没有为 MyString 添加 toString 方法呢？由于 MyString 实际上是一个 Function 对象，上面定义 MyString 语法作用等效于：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//只是为了示例，应避免使用这种语法形式，因为会导致两次编译，影响效率</span></span><br><span class="line"><span class="keyword">var</span> MyString = <span class="keyword">new</span> <span class="function"><span class="keyword">Function</span><span class="params">(<span class="string">"str"</span>, <span class="string">"this.content = str"</span>)</span></span></span><br></pre></td></tr></table></figure>
+<p>通过比较 MyString 和 Function 的 <strong>proto</strong>，可以从侧面看出 MyString 其实是 Function 的一个实例：</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(MyString.__proto__)  //  输出[<span class="function"><span class="keyword">Function</span></span>: Empty]</span><br><span class="line">console.<span class="built_in">log</span>(<span class="function"><span class="keyword">Function</span>.<span class="title">__proto__</span></span>)  //  输出[<span class="function"><span class="keyword">Function</span></span>: Empty]</span><br></pre></td></tr></table></figure>
+<p>MyString 的 <strong>proto</strong> 的指针，指向 Function 的 prototype，通过浏览器的调试功能，可以看到，这个原型就是 Object 的原型，如下图所示：</p>
+<p><img src="/images/818663-20151107121827227-1050626216.png" alt="MyString"></p>
+<p>因为 Object 是 JS 里面的根类，所有其它的类都继承于它，这个根类提供了 toString、valueOf 等6个方法。</p>
+<p>因此，找到了 Object 原型的 toString 方法，查找完成并执行：</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(<span class="built_in">name</span>.<span class="built_in">toString</span>()) <span class="comment">//输出&#123; content: 'hanMeimei' &#125;</span></span><br></pre></td></tr></table></figure>
+<p>到这里可以看到，JS里的继承就是让 function（如 MyString）的原型的 <strong>proto</strong> 指向另一个 function（如 Object）的原型。基于此，写一个自定义的类 UnicodeString 继承于 MyString</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> UString = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+<p>实现继承：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UString<span class="selector-class">.prototype</span> = MyString<span class="selector-class">.prototype</span> <span class="comment">//错误实现</span></span><br></pre></td></tr></table></figure>
+<p>注意上面的继承方法是错误的，这样只是简单的将 UString 的原型指向了 MyString 的原型，即 UString 和 MyString 使用了相同的原型，子类 UString 增删改原型的方法，MyString 也会相应地变化，另外一个继承 MyString 如 AsciiString 的类也会相应地变化。依照上文分析，应该是让 UString 的原型里的的 <strong>proto</strong> 属性指向 MyString 的原型，而不是让 UString 的原型指向 MyString。也就是说，得让 UString 有自己的独立的原型，在它的原型上添加一个指针指向父类的原型:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UString<span class="selector-class">.prototype</span>.__proto__ = MyString<span class="selector-class">.prototype</span>  <span class="comment">//不是正确的实现</span></span><br></pre></td></tr></table></figure>
+<p>因为 <strong>proto</strong> 不是一个标准的语法，在有些浏览器上是不可见的，如果在Firefox上运行上面这段代码，Firefox 会给出警告：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mutating the [[<span class="type">Prototype</span>]] of an <span class="class"><span class="keyword">object</span> <span class="title">will</span> <span class="title">cause</span> <span class="title">your</span> <span class="title">code</span> <span class="title">to</span> <span class="title">run</span> <span class="title">very</span> <span class="title">slowly</span></span>; instead create the <span class="class"><span class="keyword">object</span> <span class="keyword">with</span> <span class="title">the</span> <span class="title">correct</span> <span class="title">initial</span> [[<span class="type">Prototype</span>]] <span class="title">value</span> <span class="title">using</span> <span class="title">Object</span>.<span class="title">create</span>.</span></span><br></pre></td></tr></table></figure>
+<p>合理的做法应该是让 prototype 等于一个 object，这个 object 的 <strong>proto</strong> 指向父类的原型，因此这个 object 须要是一个 function 的实例，而这个 function 的 prototype 指向父类的原型，所以得出以下实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span> (<span class="params">o</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">    F.prototype = o</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">UString.prototype = <span class="built_in">Object</span>.create(MyString.prototype)</span><br></pre></td></tr></table></figure>
+<p>代码第2行，定义一个临时的 function，第3行让这个 function 的原型指向父类的原型，第4行返回一个实例，这个实例的 <strong>proto</strong> 就指向了父类的 prototype，第7行再把这个实例赋值给子类的 prototype。继承的实现到这里基本上就完成了。</p>
+<p>但是还有一个小问题。正常的 prototype 里面会有一个 constructor 指向构造函数 function 本身，例如上面的 MyString:</p>
+<p><img src="/images/818663-20151107151033305-596115714.png" alt="constructor"></p>
+<p>这个 constructor 的作用就在于，可在原型里面调用构造函数，例如给 MyString 类增加一个 copy 拷贝函数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MyString.prototype.copy = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//  return MyString(this.content)           //  这样实现有问题，下面再作分析</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">this</span>.constructor(<span class="keyword">this</span>.content)   <span class="comment">//  正确实现</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> anotherName = name.copy()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(anotherName.toString())           <span class="comment">//  输出hanMeimei</span></span><br><span class="line"><span class="built_in">console</span>.log(anotherName <span class="keyword">instanceof</span> MyString)  <span class="comment">//  输出true</span></span><br></pre></td></tr></table></figure></p>
+<p>问题就于：Object.create 的那段代码里第7行，完全覆盖掉了 UString 的 prototype，取代的是一个新的 object，这个 object 的 <strong>proto</strong> 指向父类即 MyString 的原型，因此 UString.prototype.constructor 在查找的时候，UString.prototype 没有 constructor 这个属性，于是向它指向的 <strong>proto</strong> 查找，找到了 MyString 的 constructor，因此 UString 的 constructor 实际上是 MyString 的 constuctor，如下所示，ustr2 实际上是 MyString 的实例，而不是期望的 UString。而不用 constructor，直接使用名字进行调用（上面代码第2行）也会有这个问题。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ustr = <span class="keyword">new</span> UString()</span><br><span class="line"><span class="keyword">var</span> ustr2 = ustr.copy()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ustr  <span class="keyword">instanceof</span> UString)  <span class="comment">//  输出true</span></span><br><span class="line"><span class="built_in">console</span>.log(ustr2 <span class="keyword">instanceof</span> UString)  <span class="comment">//  输出false</span></span><br><span class="line"><span class="built_in">console</span>.log(ustr2 <span class="keyword">instanceof</span> Mystring) <span class="comment">//  输出true</span></span><br></pre></td></tr></table></figure>
+<p>所以实现继承后需要加多一步操作，将子类 UString 原型里的 constructor 指回它自己：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UString<span class="selector-class">.prototype</span><span class="selector-class">.constructor</span> = UString</span><br></pre></td></tr></table></figure>
+<p>在执行 copy 函数里的<code>this.constructor()</code>时，实际上就是<code>UString()</code>。这时候再做 instanseof 判断就正常了：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(ustr2 <span class="keyword">instanceof</span> Ustring)  <span class="regexp">//</span>  输出<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>可以把相关操作封装成一个函数，方便复用。</p>
+<p>基本的继承核心的地方到这里就结束了，接下来还有几个问题需要考虑。</p>
+<p>第一个是子类构造函数里如何调用父类的构造函数，直接把父类的构造函数当作一个普通的函数用，同时传一个子类的 this 指针：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> UString = <span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//  MyString(str)  //不正确的实现</span></span><br><span class="line">    MyString.call(<span class="keyword">this</span>, str)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ustr = <span class="keyword">new</span> UString(<span class="string">"hanMeimei"</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ustr + <span class="string">""</span>)  <span class="comment">//输出hanMeimei</span></span><br></pre></td></tr></table></figure>
+<p>注意第3行传了一个 this 指针，在调用 MyString 的时候，这个this就指向了新产生的 UString 对象，如果直接使用第2行，那么执行的上下文是 window，this 将会指向<code>window，this.content = str</code>等价于<code>window.content = str</code>。</p>
+<p>第二个问题是私有属性的实现，在最开始的构造函数里定义的变量，其实例是公有的，可以直接访问，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyString = <span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.content = str</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="keyword">new</span> MyString(<span class="string">"hello"</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(str.content)  <span class="comment">//  直接访问，输出hello</span></span><br></pre></td></tr></table></figure>
+<p>但是典型的面向对象编程里，属性应该是私有的，操作属性应该通过类提供的方法/接口进行访问，这样才能达到封装的目的。在JS里面要实现私有，得借助function的作用域：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyString = <span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hi "</span> + str</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="keyword">new</span> MyString(<span class="string">"hanMeimei"</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(str.sayHi())  <span class="comment">//  输出hi, hanMeimei</span></span><br></pre></td></tr></table></figure>
+<p>但是这样的一个问题是，必须将函数的定义放在构造函数里，而不是之前讨论的原型，导致每生成一个实例，就会给这个实例添加一个一模一样的函数，造成内存空间的浪费。所以这样的实现是内存为代价的。如果产生很多实例，内存空间会大幅增加，这个问题是不可忽略的，因此在 JS 里面实现属性私有不太现实，即使在 ES6 的 class 语法也没有实现。但是可以给类添加静态的私有成员变量，这个私有的变量为类的所有实例所共享，如下面的案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Worker</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> id = <span class="number">1000</span></span><br><span class="line">  Worker = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    id++</span><br><span class="line">  &#125;</span><br><span class="line">  Worker.prototype.getId = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> id</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> worker1 = <span class="keyword">new</span> Worker()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(worker1.getId())  <span class="comment">//  输出1001</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> worker2 = <span class="keyword">new</span> Worker()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(worker2.getId())  <span class="comment">//  输出1002</span></span><br></pre></td></tr></table></figure>
+<p>上面的例子使用了类的静态变量，给每个 worker 产生唯一的 id。同时这个id是不允许 worker 实例直接修改的。</p>
+<p>第三个问题是虚函数，在JS里面讨论虚函数是没有太大的意义的。虚函数的一个很大的作用是实现运行时的动态，这个运行时的动态是根据子类的类型决定的，但是 JS 是一种弱类型的语言，子类的类型都是 var，只要子类有相应的方法，就可以传参“多态”运行了。比强类型的语言如 C++/Java 作了很大的简化。</p>
+<p>最后再简单说下 ES6 新引入的 class 关键字</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//需要在strict模式运行</span></span><br><span class="line"><span class="meta">'use strict'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyString</span> </span>&#123;</span><br><span class="line">   <span class="keyword">constructor</span> (str) &#123;</span><br><span class="line">       <span class="keyword">this</span>.content = str</span><br><span class="line">   &#125;</span><br><span class="line">   toString () &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">this</span>.content</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//添加了static静态函数关键字</span></span><br><span class="line">   <span class="keyword">static</span> concat (str1, str2) &#123;</span><br><span class="line">       <span class="keyword">return</span> str1 + str2</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  extends继承关键字</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UString</span> <span class="keyword">extends</span> <span class="title">MyString</span></span>&#123;</span><br><span class="line">   <span class="keyword">constructor</span> (str) &#123;</span><br><span class="line">   <span class="comment">//  使用super调用父类的方法</span></span><br><span class="line">       <span class="keyword">super</span>(str)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str1 = <span class="keyword">new</span> MyString(<span class="string">"hello"</span>),</span><br><span class="line">    str2 = <span class="keyword">new</span> MyString(<span class="string">" world"</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(str1)                         <span class="comment">//  输出MyString &#123; content: "hello" &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(str1.content)                 <span class="comment">//  输出hello</span></span><br><span class="line"><span class="built_in">console</span>.log(str1.toString())              <span class="comment">//  输出hello</span></span><br><span class="line"><span class="built_in">console</span>.log(MyString.concat(str1, str2))  <span class="comment">//  输出hello world</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ustr = <span class="keyword">new</span> UString(<span class="string">"ustring"</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ustr)                         <span class="comment">//  输出MyString &#123; content: "ustring" &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(ustr.toString())              <span class="comment">//  输出ustring</span></span><br></pre></td></tr></table></figure>
+<p>从输出的结果来看，新的 class 还是没有实现属性私有的功能，见第27行。并且从第26行看出，所谓的 class 其实就是编译器帮我们实现了上面复杂的过程，其本质是一样的，但是让代码变得更加简化明了。一个不同点是，多了 static 关键字，直接用类名调用类的函数。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/20/对象的浅拷贝和深拷贝/" rel="next" title="对象的浅拷贝和深拷贝">
+                <i class="fa fa-chevron-left"></i> 对象的浅拷贝和深拷贝
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/29/JavaScript-函数防抖和节流/" rel="prev" title="JavaScript 函数防抖和节流">
+                JavaScript 函数防抖和节流 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/04/20/深入浅出JS的封装与继承/"
+           data-title="深入浅出 JS 的封装与继承" data-url="https://zoezying.github.io/2018/04/20/深入浅出JS的封装与继承/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Zzy" />
+          <p class="site-author-name" itemprop="name">Zzy</p>
+          <p class="site-description motion-element" itemprop="description">记录我的一切</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zzy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzying-ds"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
